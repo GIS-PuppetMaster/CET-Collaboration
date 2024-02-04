@@ -66,6 +66,7 @@ public class DataNodeServerCommandLine extends ServerCommandLine {
 
   @Override
   protected int run(String[] args) throws Exception {
+    // 这里创建云端的通信类的线程，一对多
     if (args.length < 1) {
       usage(null);
       return -1;

@@ -204,6 +204,7 @@ public class QueryExecution implements IQueryExecution {
   }
 
   public void start() {
+    // 创建云-边通信的线程（边侧），这里需要写一个通信类，继承Threading类，可以把实例塞到context里面
     final long startTime = System.nanoTime();
     if (skipExecute()) {
       logger.debug("[SkipExecute]");

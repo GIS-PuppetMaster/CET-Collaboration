@@ -318,7 +318,7 @@
                                 <configuration>
                                     <tasks>
                                         <exec executable="/bin/bash">
-                                            <arg line="-c ./replace-picture-urls.sh" />
+                                            <arg line="-c ./replace-picture-urls.sh"/>
                                         </exec>
                                     </tasks>
                                 </configuration>
