@@ -18,6 +18,8 @@ public class ServiceImpl implements CtoEService.Iface{
             message.setNum(data.getNum());
             message.setMin(data.getMin());
             message.setMax(data.getMax());
+            ReadFromCloudFlag readFromCloudFlag=ReadFromCloudFlag.getInstance();
+            readFromCloudFlag.setFlag(true);
         } catch (Exception e) {
             System.err.println("Error sending data: " + e.getMessage());
         }

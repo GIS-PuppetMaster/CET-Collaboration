@@ -39,23 +39,23 @@ public class ServerStart {
 //            e.printStackTrace();
 //        }
         //多线程非阻塞
-        try{
-            TNonblockingServerSocket transport =new TNonblockingServerSocket(9090);
-            CtoEService.Processor processor = new CtoEService.Processor(new ServiceImpl());
-            TBinaryProtocol.Factory protocolFactory = new TBinaryProtocol.Factory();
-            TFramedTransport.Factory tTransport = new TFramedTransport.Factory();
-
-            THsHaServer.Args targs = new THsHaServer.Args(transport);
-            targs.processor(processor);
-            targs.protocolFactory(protocolFactory);
-            targs.transportFactory(tTransport);
-
-            TServer server = new THsHaServer(targs);
-            System.out.println("Starting the receiver server...");
-            server.serve();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+//        try{
+//            TNonblockingServerSocket transport =new TNonblockingServerSocket(9090);
+//            CtoEService.Processor processor = new CtoEService.Processor(new ServiceImpl());
+//            TBinaryProtocol.Factory protocolFactory = new TBinaryProtocol.Factory();
+//            TFramedTransport.Factory tTransport = new TFramedTransport.Factory();
+//
+//            THsHaServer.Args targs = new THsHaServer.Args(transport);
+//            targs.processor(processor);
+//            targs.protocolFactory(protocolFactory);
+//            targs.transportFactory(tTransport);
+//
+//            TServer server = new THsHaServer(targs);
+//            System.out.println("Starting the receiver server...");
+//            server.serve();
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
 
     }
 }

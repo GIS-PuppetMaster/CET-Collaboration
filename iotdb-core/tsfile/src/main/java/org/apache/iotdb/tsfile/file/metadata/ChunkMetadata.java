@@ -106,6 +106,7 @@ public class ChunkMetadata implements IChunkMetadata {
   public ChunkMetadata(ChunkMetadata other) {
     this.measurementUid = other.measurementUid;
     this.offsetOfChunkHeader = other.offsetOfChunkHeader;
+//    System.out.println(this.offsetOfChunkHeader);
     this.tsDataType = other.tsDataType;
     this.version = other.version;
     this.chunkLoader = other.chunkLoader;

@@ -92,6 +92,7 @@ import org.apache.iotdb.udf.api.exception.UDFManagementException;
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import zyh.service.SendData;
 
 import java.io.File;
 import java.io.IOException;
@@ -158,11 +159,13 @@ public class DataNode implements DataNodeMBean {
   public static void main(String[] args) {
     logger.info("IoTDB-DataNode environment variables: {}", IoTDBConfig.getEnvironmentVariables());
     logger.info("IoTDB-DataNode default charset is: {}", Charset.defaultCharset().displayName());
-    //新建thrift服务器
-    Thread serverThread = new Thread(new ServerRunnable());//启动服务器
-    serverThread.start();
+//    //新建thrift服务器
+//    Thread serverThread = new Thread(new ServerRunnable());//启动服务器
+//    serverThread.start();
 
     new DataNodeServerCommandLine().doMain(args);
+
+
   }
 
   protected void doAddNode() {
@@ -962,11 +965,11 @@ public class DataNode implements DataNodeMBean {
     }
   }
 }
-class ServerRunnable implements Runnable {
-  @Override
-  public void run() {
-    // 创建并启动服务器
-    ServerStart server = new ServerStart();
-    server.start();
-  }
-}
+//class ServerRunnable implements Runnable {
+//  @Override
+//  public void run() {
+//    // 创建并启动服务器
+//    ServerStart server = new ServerStart();
+//    server.start();
+//  }
+//}

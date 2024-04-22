@@ -40,6 +40,7 @@ import org.apache.iotdb.db.queryengine.plan.execution.ExecutionResult;
 import org.apache.iotdb.db.queryengine.plan.execution.IQueryExecution;
 import org.apache.iotdb.db.queryengine.plan.execution.QueryExecution;
 import org.apache.iotdb.db.queryengine.plan.execution.config.ConfigExecution;
+import org.apache.iotdb.db.queryengine.plan.planner.plan.DistributedQueryPlan;
 import org.apache.iotdb.db.queryengine.plan.statement.IConfigStatement;
 import org.apache.iotdb.db.queryengine.plan.statement.Statement;
 import org.apache.iotdb.db.utils.SetThreadName;
@@ -52,6 +53,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
+import org.apache.iotdb.db.queryengine.plan.planner.plan.node.PlanNodeUtil;
 
 /**
  * The coordinator for MPP. It manages all the queries which are executed in current Node. And it
@@ -110,6 +112,26 @@ public class Coordinator {
       queryContext.setQueryType(((IConfigStatement) statement).getQueryType());
       return new ConfigExecution(queryContext, statement, executor);
     }
+//    QueryExecution execution=new QueryExecution(
+//            statement,
+//            queryContext,
+//            executor,
+//            writeOperationExecutor,
+//            scheduledExecutor,
+//            partitionFetcher,
+//            schemaFetcher,
+//            SYNC_INTERNAL_SERVICE_CLIENT_MANAGER,
+//            ASYNC_INTERNAL_SERVICE_CLIENT_MANAGER);
+//    execution.doLogicalPlan();
+////    System.out.printf("SQL: %s%n%n", querySql);
+//    System.out.println("===== Step 1: Logical Plan =====");
+//    System.out.println(PlanNodeUtil.nodeToString(execution.getLogicalPlan().getRootNode()));
+//
+//    execution.doDistributedPlan();
+//    DistributedQueryPlan distributedQueryPlan = execution.getDistributedPlan();
+//
+//    System.out.println("===== Step 4: Split Fragment Instance =====");
+//    distributedQueryPlan.getInstances().forEach(System.out::println);
     return new QueryExecution(
         statement,
         queryContext,
@@ -151,6 +173,7 @@ public class Coordinator {
               schemaFetcher,
               timeOut > 0 ? timeOut : CONFIG.getQueryTimeoutThreshold(),
               startTime);
+
       if (execution.isQuery()) {
         queryExecutionMap.put(queryId, execution);
       } else {

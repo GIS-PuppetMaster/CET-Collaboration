@@ -102,6 +102,7 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.layered.TFramedTransport;
+import zyh.service.SendData;
 
 /**
  * QueryExecution stores all the status of a query which is being prepared or running inside the MPP
@@ -159,7 +160,7 @@ public class QueryExecution implements IQueryExecution {
       QueryPlanCostMetricSet.getInstance();
   private static final PerformanceOverviewMetrics PERFORMANCE_OVERVIEW_METRICS =
       PerformanceOverviewMetrics.getInstance();
-  public boolean ServerisOpen = false;//服务器开启标志
+  public static int flag_num =0;//服务器开启标志
 
   @SuppressWarnings("squid:S107")
   public QueryExecution(
@@ -272,6 +273,9 @@ public class QueryExecution implements IQueryExecution {
 //    }
 
 
+//          ReadFromCloudFlag readFromCloudFlag=ReadFromCloudFlag.getInstance();
+//          readFromCloudFlag.setFlag(true);
+
 
     if (skipExecute()) {
       logger.debug("[SkipExecute]");
@@ -283,7 +287,15 @@ public class QueryExecution implements IQueryExecution {
       }
       return;
     }
-
+//    if(flag_num == 1){
+//      SendData sendData = new SendData();
+//      sendData.send();
+//      flag_num=0;
+//    }else {
+//      flag_num++;
+//    }
+//    SendData sendData = new SendData();
+//    sendData.send();
     // check timeout for query first
     checkTimeOutForQuery();
     doLogicalPlan();
@@ -297,6 +309,9 @@ public class QueryExecution implements IQueryExecution {
       initResultHandle();
     }
     PERFORMANCE_OVERVIEW_METRICS.recordPlanCost(System.nanoTime() - startTime);
+//    ReceiveTsBlock receive=new ReceiveTsBlock();
+//    TsBlock reveiveTsBlock = receive.receive();
+
     schedule();
 
     // set partial insert error message
@@ -849,11 +864,11 @@ public class QueryExecution implements IQueryExecution {
 //    server.start();
 //  }
 //}
-class ReceiveRunnable implements Runnable {
-  @Override
-  public void run() {
-    ReceiveTsBlock receive=new ReceiveTsBlock();
-    receive.receive();
-  }
-}
+//class ReceiveRunnable implements Runnable {
+//  @Override
+//  public void run() {
+//    ReceiveTsBlock receive=new ReceiveTsBlock();
+//    receive.receive();
+//  }
+//}
 
